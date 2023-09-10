@@ -12,10 +12,10 @@ export class UtilisateursController {
     return this.utilisateursService.create(createUtilisateurDto);
   }
 
-  @Get()
-  findAll() {
-    return this.utilisateursService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.utilisateursService.findAll();
+  // }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
@@ -27,8 +27,8 @@ export class UtilisateursController {
     return this.utilisateursService.update(+id, updateUtilisateurDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.utilisateursService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.utilisateursService.remove(+id);
+  // }
 }

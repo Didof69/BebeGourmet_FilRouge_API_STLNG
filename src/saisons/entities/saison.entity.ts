@@ -9,6 +9,6 @@ export class Saison {
   @Column({ nullable: false })
   libelle: string;
 
-  @ManyToMany(() => Aliment, (aliment) => aliment.saisons,{eager:true})
+  @ManyToMany(() => Aliment, (aliment) => aliment.saisons,{eager:false})
   aliments: Aliment[];
 }

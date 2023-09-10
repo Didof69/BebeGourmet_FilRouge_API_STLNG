@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAlimentDto } from './dto/create-aliment.dto';
 import { UpdateAlimentDto } from './dto/update-aliment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,23 +11,34 @@ export class AlimentsService {
     @InjectRepository(Aliment) private alimentsRepository: Repository<Aliment>,
   ) {}
 
-  create(createAlimentDto: CreateAlimentDto) {
-    return 'This action adds a new aliment';
+  async create(createAlimentDto: CreateAlimentDto) {
+    const aliment = this.alimentsRepository.create(createAlimentDto);
+    const result = await this.alimentsRepository.save(aliment);
+    return result;
   }
 
   findAll() {
     return this.alimentsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} aliment`;
+  async findOne(id: number) {
+    const found = await this.alimentsRepository.findOneBy({ id });
+    if (!found) {
+      throw new NotFoundException(`Aliment with the id ${id} not found`);
+    }
+    return found;
   }
 
-  update(id: number, updateAlimentDto: UpdateAlimentDto) {
-    return `This action updates a #${id} aliment`;
+  async update(id: number, updateAlimentDto: UpdateAlimentDto) {
+    const aliment = await this.findOne(id);
+    const newAliment = this.alimentsRepository.merge(aliment, updateAlimentDto);
+    const result = await this.alimentsRepository.save(newAliment);
+    return result;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} aliment`;
+  async remove(id: number) {
+    const aliment = await this.findOne(id);
+    await this.alimentsRepository.remove(aliment);
+    return `Aliment with id : ${id} has been deleted`;
   }
 }

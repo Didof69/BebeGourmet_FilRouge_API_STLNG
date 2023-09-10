@@ -21,7 +21,7 @@ export class Aliment {
   @JoinColumn({ name: 'id_categorie' })
   category: Category;
 
-  @ManyToMany(() => Saison, (saison) => saison.aliments, { eager: false })
+  @ManyToMany(() => Saison, (saison) => saison.aliments, { eager: true })
   @JoinTable({
     //nécessaire que sur une des deux tables
     name: 'produire', // nom de la table d'association dans BDD

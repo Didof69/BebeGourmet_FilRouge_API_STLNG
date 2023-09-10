@@ -7,28 +7,28 @@ import { UpdateSaisonDto } from './dto/update-saison.dto';
 export class SaisonsController {
   constructor(private readonly saisonsService: SaisonsService) {}
 
-  @Post()
-  create(@Body() createSaisonDto: CreateSaisonDto) {
-    return this.saisonsService.create(createSaisonDto);
-  }
+  // @Post()
+  // create(@Body() createSaisonDto: CreateSaisonDto) {
+  //   return this.saisonsService.create(createSaisonDto);
+  // }
 
   @Get()
   findAll() {
     return this.saisonsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.saisonsService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.saisonsService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSaisonDto: UpdateSaisonDto) {
-    return this.saisonsService.update(+id, updateSaisonDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateSaisonDto: UpdateSaisonDto) {
+  //   return this.saisonsService.update(+id, updateSaisonDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.saisonsService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.saisonsService.remove(+id);
+  // }
 }

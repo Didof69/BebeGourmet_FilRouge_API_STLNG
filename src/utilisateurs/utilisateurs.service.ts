@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 import { Utilisateur } from './entities/utilisateur.entity';
@@ -10,25 +10,34 @@ export class UtilisateursService {
   constructor(
     @InjectRepository(Utilisateur)
     private utilisateursRepository: Repository<Utilisateur>,
-  ) { }
-  
-  create(createUtilisateurDto: CreateUtilisateurDto) {
-    return 'This action adds a new utilisateur';
+  ) {}
+
+  async create(createUtilisateurDto: CreateUtilisateurDto) {
+    const utilisteur = this.utilisateursRepository.create(createUtilisateurDto);
+    const result = await this.utilisateursRepository.save(utilisteur);
+    return result;
   }
 
-  findAll() {
-    return this.utilisateursRepository.find();
+  // findAll() {
+  //   return this.utilisateursRepository.find();
+  // }
+
+  async findOne(id: number) {
+    const found = await this.utilisateursRepository.findOneBy({ id });
+    if (!found) {
+      throw new NotFoundException(`Utilisateur with the id ${id} not found`);
+    }
+    return found;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} utilisateur`;
+  async update(id: number, updateUtilisateurDto: UpdateUtilisateurDto) {
+    const utilisateur = await this.findOne(id);
+    const newUtilisateur = this.utilisateursRepository.merge(utilisateur, updateUtilisateurDto);
+    const result = await this.utilisateursRepository.save(newUtilisateur);
+    return result;
   }
 
-  update(id: number, updateUtilisateurDto: UpdateUtilisateurDto) {
-    return `This action updates a #${id} utilisateur`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} utilisateur`;
-  }
+  // remove(id: number) {
+  //   return `This action removes a #${id} utilisateur`;
+  // }
 }
