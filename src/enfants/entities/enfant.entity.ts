@@ -21,7 +21,7 @@ export class Enfant {
   utilisateur: Utilisateur;
 
   @ManyToMany(() => Restriction, (restriction) => restriction.enfants, {
-    eager: false,
+    eager: true,
   })
   @JoinTable({
     name: 'posseder',

@@ -15,6 +15,7 @@ import { Category } from './categories/entities/category.entity';
 import { Enfant } from './enfants/entities/enfant.entity';
 import { Restriction } from './restrictions/entities/restriction.entity';
 import { Utilisateur } from './utilisateurs/entities/utilisateur.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { Utilisateur } from './utilisateurs/entities/utilisateur.entity';
       entities: [Aliment, Saison, Category, Enfant,Restriction,Utilisateur],
       synchronize: false,
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

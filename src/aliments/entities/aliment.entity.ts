@@ -32,7 +32,7 @@ export class Aliment {
   })
   saisons: Saison[];
 
-  @ManyToMany(() => Restriction, (restriction) => restriction.aliments, { eager: false })
+  @ManyToMany(() => Restriction, (restriction) => restriction.aliments, { eager: true })
   @JoinTable({
     name: 'limiter',
     joinColumn: { name: 'id_aliment', referencedColumnName: 'id' },

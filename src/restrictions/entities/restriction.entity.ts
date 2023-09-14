@@ -10,9 +10,9 @@ export class Restriction {
   @Column({ nullable: false })
   libelle: string;
 
-  @ManyToMany(() => Aliment, (aliment) => aliment.restrictions, { eager: true })
+  @ManyToMany(() => Aliment, (aliment) => aliment.restrictions, { eager: false })
   aliments: Aliment[];
 
-  @ManyToMany(() => Enfant, (enfant) => enfant.restrictions, { eager: true })
+  @ManyToMany(() => Enfant, (enfant) => enfant.restrictions, { eager: false })
   enfants: Enfant[];
 }

@@ -278,3 +278,7 @@ import { ApiTags } from '@nestjs/swagger';
 export class UsersController {}
 
 ```
+# Authentification
+
+Voir le tuto de Jeremy
+https://dev-formation.notion.site/TP-Authentification-et-Autorisation-NestJs-ff3439be72124e7eb0faf1237b1890a7
