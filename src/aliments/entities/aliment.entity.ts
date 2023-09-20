@@ -17,7 +17,7 @@ export class Aliment {
   @Column({ nullable: false, type: 'int' })
   id_categorie: number;
 
-  @ManyToOne(() => Category, (category) => category.aliments)
+  @ManyToOne(() => Category, (category) => category.aliments, {eager:true})
   @JoinColumn({ name: 'id_categorie' })
   category: Category;
 
