@@ -8,6 +8,7 @@ import { UpdateEnfantDto } from './dto/update-enfant.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Enfant } from './entities/enfant.entity';
+import { log } from 'console';
 
 @Injectable()
 export class EnfantsService {
@@ -76,7 +77,7 @@ export class EnfantsService {
 
   async remove(idEnfant: number, idUtilisateur: number) {
     const enfant = await this.findOne(idEnfant, idUtilisateur);
-    await this.enfantsRepository.remove(enfant);
-    return `Enfant with id : ${idEnfant} has been deleted`;
+    const response = await this.enfantsRepository.remove(enfant);
+    return response
   }
 }

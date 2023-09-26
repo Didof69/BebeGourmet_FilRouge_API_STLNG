@@ -29,10 +29,8 @@ export class AlimentsController {
     @GetUser() utilisateur: Utilisateur,
   ) {
     if (!utilisateur.admin) {
-      console.log('create aliment', utilisateur);
       throw new UnauthorizedException('Droits admin nécéssaires');
     }
-    console.log('create aliment', utilisateur);
     return this.alimentsService.create(createAlimentDto);
   }
 

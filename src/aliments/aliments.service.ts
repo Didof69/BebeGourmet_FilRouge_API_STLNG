@@ -31,26 +31,23 @@ export class AlimentsService {
 
   async update(id: number, updateAlimentDto: UpdateAlimentDto) {
     let aliment = await this.findOne(id);
-
+    
     if (updateAlimentDto.saisons) {
-      aliment.saisons = updateAlimentDto.saisons;
+         aliment.saisons= updateAlimentDto.saisons;
     }
 
     if (updateAlimentDto.restrictions) {
-      aliment.restrictions = updateAlimentDto.restrictions;
+          aliment.restrictions= updateAlimentDto.restrictions;
     }
 
-    const updatedAliment = this.alimentsRepository.merge(
-      aliment,
-      updateAlimentDto,
-    );
-    const result = await this.alimentsRepository.save(updatedAliment);
+    const updatedAliment = this.alimentsRepository.merge(aliment,updateAlimentDto)
+    const result = await this.alimentsRepository.save(updatedAliment);    
     return result;
   }
 
   async remove(id: number) {
-    const aliment = await this.findOne(id);
-    const reponse = await this.alimentsRepository.remove(aliment);
-    return reponse;
+   const aliment = await this.findOne(id);
+    const response= await this.alimentsRepository.remove(aliment);
+    return  response
   }
 }
