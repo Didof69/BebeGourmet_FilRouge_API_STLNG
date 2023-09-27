@@ -28,7 +28,7 @@ export class AuthService {
       prenom,
       email,
       mot_de_passe: hashedPassword,
-      admin,
+      admin: false,
     });
 
     try {

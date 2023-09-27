@@ -66,7 +66,6 @@ export class AlimentsController {
       // console.log('create aliment', utilisateur);
       throw new UnauthorizedException('Droits admin nécéssaires');
     }
-    // console.log('create aliment', utilisateur);
     return this.alimentsService.remove(+id);
   }
 }
