@@ -46,7 +46,7 @@ _nb: equivalence dotenv dans nodejs_
 ```
 @Module({
   imports: [
-    ConfigModule.forRoot({envFilePath:[`.env`]}), PlantsModule, 
+    ConfigModule.forRoot({envFilePath:[`.env`]}), nom-ressourceModule, 
     TypeOrmModule.forRoot({
         type: 'postgres', 
         host: 'localhost', 
@@ -54,7 +54,7 @@ _nb: equivalence dotenv dans nodejs_
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DATABASE,
-        entities: [Plant], 
+        entities: [nom-ressource], 
         synchronize: false,
     }),    
   ],
@@ -86,10 +86,10 @@ _nb: ajouter .env dans .gitignore pour que notre mot de passe ne soit pas devoil
 app.setGlobalPrefix('api'),
 ```
 
-## Etape 9 : dans plants.module.ts, importer TypeORMModule
+## Etape 9 : dans nom-ressource.module.ts, importer TypeORMModule
 ```
 @Module({
-  imports: [TypeOrmModule.forFeature([Plant])],
+  imports: [TypeOrmModule.forFeature([Nom-ressource])],
   ...
 })
 ```
@@ -97,15 +97,16 @@ app.setGlobalPrefix('api'),
 _nb: si pas d'import automatique :_
 ```
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Plant } from './entities/plant.entity';
+import { Nom-ressource } from './entities/nom-ressource.entity';
 ```
 
-## Etape 10 : dans plant.entity.ts, définir notre entité Plant
+## Etape 10 : dans nom-ressource.entity.ts, définir notre entité Nom-ressource
 ```
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Plant {
+export class nom-ressource {
+<!-- exemples -->
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -129,9 +130,9 @@ export class Plant {
 _nb: ({ length: 500 }) = contrainte_
 
 ## Etape 11 : créer nos DTO
-### dans create-plant.dto.ts
+### dans create-nom-ressource.dto.ts
 ```
-export class CreatePlantDto {
+export class CreateNom-ressourceDto {
   nom: string;
   soleil: string;
   arrosage: number;
@@ -140,22 +141,22 @@ export class CreatePlantDto {
 }
 ```
 
-### dans update-plant.dto.ts
-=>herite des propriétés de CreatePlantDto
+### dans update-nom-ressource.dto.ts
+=>herite des propriétés de CreateNom-ressourceDto
 =>si on veut choisir les propriétés que l'on peut modifier on les notifie ici
 
-## Etape 12 : dans plants.service.ts
+## Etape 12 : dans nom-ressources.service.ts
 ###  créer le contructor
 ```
   constructor(
-    @InjectRepository(Plant) private plantsRepository: Repository<Plant>,
+    @InjectRepository(nom-ressource) private nom-ressourcesRepository: Repository<nom-ressource>,
   ) { }
 ```
 
 _nb: si pas d'import automatique :_
 ```
 import { InjectRepository } from '@nestjs/typeorm';
-import { Plant } from './entities/plant.entity';
+import { nom-ressource } from './entities/nom-ressource.entity';
 import { Repository } from 'typeorm';
 ```
 
@@ -163,9 +164,9 @@ import { Repository } from 'typeorm';
 
 ###  pour ce projet, le create :
 ```
-  async create(createPlantDto: CreatePlantDto) {
-    const plant = this.plantsRepository.create(createPlantDto);
-    const result = await this.plantsRepository.save(plant);
+  async create(createNom-ressourceDto: CreateNom-ressourceDto) {
+    const nom-ressource = this.nom-ressourcesRepository.create(createnom-ressourceDto);
+    const result = await this.nom-ressourcesRepository.save(nom-ressource);
     return result;
   }
 ```
@@ -205,7 +206,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 ## Etape 3 : paramétrer le DTO :
 ```
-export class CreatePlantDto {
+export class Createnom-ressourceDto {
   @IsNotEmpty() //décorateur class-validator
   nom: string;
 
