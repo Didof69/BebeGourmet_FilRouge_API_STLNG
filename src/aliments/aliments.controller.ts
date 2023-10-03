@@ -52,10 +52,8 @@ export class AlimentsController {
     @GetUser() utilisateur: Utilisateur,
   ) {
     if (!utilisateur.admin) {
-      // console.log('create aliment', utilisateur);
       throw new UnauthorizedException('Droits admin nécéssaires');
     }
-    // console.log('create aliment', utilisateur);
     return this.alimentsService.update(+id, updateAlimentDto);
   }
 
@@ -63,7 +61,6 @@ export class AlimentsController {
   @UseGuards(AuthGuard())
   remove(@Param('id') id: string, @GetUser() utilisateur: Utilisateur) {
     if (!utilisateur.admin) {
-      // console.log('create aliment', utilisateur);
       throw new UnauthorizedException('Droits admin nécéssaires');
     }
     return this.alimentsService.remove(+id);
