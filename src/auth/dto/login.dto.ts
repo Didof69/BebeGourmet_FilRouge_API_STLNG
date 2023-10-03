@@ -10,6 +10,6 @@ export class LoginDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/)
+  @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$/)
   mot_de_passe: string;
 }
