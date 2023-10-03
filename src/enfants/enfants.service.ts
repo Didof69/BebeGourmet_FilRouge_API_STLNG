@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   ForbiddenException,
   Injectable,
   NotFoundException,
@@ -18,6 +19,10 @@ export class EnfantsService {
   ) {}
 
   async create(createEnfantDto: CreateEnfantDto, id_utilisateur: number) {
+        if (this.calculerAgeEnMois(createEnfantDto.date_naissance)<4) {
+          throw new ConflictException("L'enfant est trop petit.");
+        }
+    
     const enfant = this.enfantsRepository.create(createEnfantDto);
     enfant.id_utilisateur = id_utilisateur;
     // console.log('infos enfant sauvegardées :', enfant);
@@ -78,6 +83,22 @@ export class EnfantsService {
   async remove(idEnfant: number, idUtilisateur: number) {
     const enfant = await this.findOne(idEnfant, idUtilisateur);
     const response = await this.enfantsRepository.remove(enfant);
-    return response
+    return response;
+  }
+
+  calculerAgeEnMois(dateNaissance: Date): number {
+    const today = new Date(); //récuperer la date actuelle
+    const dateAnniv = new Date(dateNaissance); //représente date de naissance enfant
+
+    let mois = (today.getFullYear() - dateAnniv.getFullYear()) * 12;
+    //ex: 2023-2022 = 1 => 1*12 = 12 mois
+    mois += today.getMonth() - dateAnniv.getMonth() + 1;
+    //ajoute cette difference de mois au total déjà calculé pour les années
+    //les mois sont indexé à partir de 0, soit ex : septembre = 8
+
+    if (today.getDate() < dateAnniv.getDate()) {
+      mois--;
+    }
+    return mois;
   }
 }
