@@ -25,7 +25,6 @@ export class EnfantsService {
     
     const enfant = this.enfantsRepository.create(createEnfantDto);
     enfant.id_utilisateur = id_utilisateur;
-    // console.log('infos enfant sauvegardées :', enfant);
     const result = await this.enfantsRepository.save(enfant);
     return result;
   }

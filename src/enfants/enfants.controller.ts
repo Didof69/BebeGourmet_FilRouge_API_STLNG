@@ -28,13 +28,11 @@ export class EnfantsController {
     @Body() createEnfantDto: CreateEnfantDto,
     @GetUser() utilisateur: Utilisateur,
   ): Promise<Enfant> {
-    // console.log(utilisateur);
     return this.enfantsService.create(createEnfantDto, utilisateur.id);
   }
 
   @Get()
   findEnfantByIdUtilisateur(@GetUser() utilisateur: Utilisateur): Promise<Enfant[]> {
-    // console.log('find enfant', utilisateur);
     return this.enfantsService.findEnfantByIdUtilisateur(utilisateur.id);
   }
 
