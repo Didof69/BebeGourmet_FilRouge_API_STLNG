@@ -29,7 +29,7 @@ export class AlimentsController {
     @GetUser() utilisateur: Utilisateur,
   ) {
     if (!utilisateur.admin) {
-      throw new UnauthorizedException('Droits admin nécéssaires');
+      throw new UnauthorizedException('Droits admin nécessaires');
     }
     return this.alimentsService.create(createAlimentDto);
   }
@@ -52,7 +52,7 @@ export class AlimentsController {
     @GetUser() utilisateur: Utilisateur,
   ) {
     if (!utilisateur.admin) {
-      throw new UnauthorizedException('Droits admin nécéssaires');
+      throw new UnauthorizedException('Droits admin nécessaires');
     }
     return this.alimentsService.update(+id, updateAlimentDto);
   }
@@ -61,7 +61,7 @@ export class AlimentsController {
   @UseGuards(AuthGuard())
   remove(@Param('id') id: string, @GetUser() utilisateur: Utilisateur) {
     if (!utilisateur.admin) {
-      throw new UnauthorizedException('Droits admin nécéssaires');
+      throw new UnauthorizedException('Droits admin nécessaires');
     }
     return this.alimentsService.remove(+id);
   }
