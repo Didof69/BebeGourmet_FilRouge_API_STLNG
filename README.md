@@ -46,7 +46,8 @@ _nb: equivalence dotenv dans nodejs_
 ```
 @Module({
   imports: [
-    ConfigModule.forRoot({envFilePath:[`.env`]}), nom-ressourceModule, 
+    ConfigModule.forRoot({envFilePath:[`.env`]}), 
+    nom-ressourceModule, 
     TypeOrmModule.forRoot({
         type: 'postgres', 
         host: 'localhost', 
